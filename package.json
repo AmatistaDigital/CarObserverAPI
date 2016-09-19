@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "./node_modules/eslint/bin/eslint.js index.js"
   },
   "author": "",
   "license": "ISC",
