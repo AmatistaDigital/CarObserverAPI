@@ -12,6 +12,7 @@ pubnub.subscribe({
 r.connect({ host : 'localhost', port : 28015, db : 'carobserver' }).then((conn) => {
   r.table('location').changes().run(conn).then((cursor) => {
     cursor.on('data', (message) => {
+      console.log(`sending car position ${Math.random()}`);
       pubnub.publish({
         channel : 'carobserver:current-car-position',
         message : message.new_val,
@@ -25,6 +26,7 @@ r.connect({ host : 'localhost', port : 28015, db : 'carobserver' }).then((conn) 
 
 pubnub.addListener({
   message : (messageData) => {
+    console.log(`receiving car position ${Math.random()}`);
     const position = messageData.message;
     r.connect({ host : 'localhost', port : 28015, db : 'carobserver' }).then((conn) => {
       r.table('location').insert({
